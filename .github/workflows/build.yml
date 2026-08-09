@@ -37,14 +37,14 @@ jobs:
       - name: Build debug APK (installable, unsigned)
         run: flutter build apk --debug
 
-      - name: Build release APK (needs signing before Play Store upload)
-        run: flutter build apk --release
-
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: excel-guru-debug-apk
           path: build/app/outputs/flutter-apk/app-debug.apk
+
+      - name: Build release APK (needs signing before Play Store upload)
+        run: flutter build apk --release
 
       - name: Upload release APK
         uses: actions/upload-artifact@v4
