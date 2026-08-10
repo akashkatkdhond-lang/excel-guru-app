@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import '../models/quiz_question.dart';
 import '../services/ad_service.dart';
 import '../services/progress_service.dart';
@@ -46,6 +47,14 @@ class _QuizScreenState extends State<QuizScreen> {
     });
   }
 
+  void _shareScore() {
+    final total = widget.quiz.questions.length;
+    Share.share(
+      'Maine "${widget.quiz.title}" quiz me $_score/$total score kiya Excel Guru app par! 🎉 '
+      'Tum bhi Excel seekho: https://play.google.com/store',
+    );
+  }
+
   void _showResultDialog() {
     final total = widget.quiz.questions.length;
     showDialog(
@@ -55,6 +64,10 @@ class _QuizScreenState extends State<QuizScreen> {
         title: const Text('Quiz Complete! 🎉'),
         content: Text('Aapka score: $_score / $total'),
         actions: [
+          TextButton(
+            onPressed: _shareScore,
+            child: const Text('Share'),
+          ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();

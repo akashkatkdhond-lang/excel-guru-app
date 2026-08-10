@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/lessons_data.dart';
+import '../services/language_service.dart';
 import '../services/progress_service.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/lesson_card.dart';
@@ -13,6 +14,8 @@ class LessonListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final progress = context.watch<ProgressService>();
+    final language = context.watch<LanguageService>().language;
+    final lessonList = lessonsFor(language);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Lessons')),
@@ -22,9 +25,9 @@ class LessonListScreen extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                itemCount: lessons.length,
+                itemCount: lessonList.length,
                 itemBuilder: (context, index) {
-                  final lesson = lessons[index];
+                  final lesson = lessonList[index];
                   final isLocked = lesson.isPremium && !progress.isPremium;
                   final isCompleted = progress.completedLessons.contains(lesson.id);
                   return LessonCard(

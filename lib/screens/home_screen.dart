@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/lessons_data.dart';
 import '../data/quiz_data.dart';
+import '../services/language_service.dart';
 import '../services/progress_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/streak_card.dart';
+import 'badges_screen.dart';
+import 'certificate_screen.dart';
+import 'language_screen.dart';
 import 'lesson_list_screen.dart';
 import 'premium_screen.dart';
 import 'quiz_list_screen.dart';
@@ -16,11 +21,25 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final progress = context.watch<ProgressService>();
+    final language = context.watch<LanguageService>().language;
     final completedCount = progress.completedLessons.length;
-    final total = lessons.length;
+    final total = lessonsFor(language).length;
+    final allLessonsDone = total > 0 && completedCount >= total;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Excel Guru')),
+      appBar: AppBar(
+        title: const Text('Excel Guru'),
+        actions: [
+          IconButton(
+            tooltip: 'Language',
+            icon: const Icon(Icons.language),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const LanguageScreen()),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -29,6 +48,8 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 children: [
                   _WelcomeCard(completed: completedCount, total: total),
+                  const SizedBox(height: 14),
+                  StreakCard(currentStreak: progress.currentStreak),
                   const SizedBox(height: 20),
                   Text('Seekhna shuru karein', style: Theme.of(context).textTheme.titleMedium),
                   const SizedBox(height: 10),
@@ -45,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                   _MenuTile(
                     icon: Icons.quiz_rounded,
                     title: 'Quiz',
-                    subtitle: '${quizSets.length} quiz sets — apna score check karein',
+                    subtitle: '${quizSetsFor(language).length} quiz sets — apna score check karein',
                     color: Colors.deepOrange,
                     onTap: () => Navigator.push(
                       context,
@@ -61,6 +82,44 @@ class HomeScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(builder: (_) => const SimulatorScreen()),
                     ),
+                  ),
+                  _MenuTile(
+                    icon: Icons.emoji_events_rounded,
+                    title: 'Badges',
+                    subtitle: 'Apni achievements dekhein',
+                    color: Colors.amber.shade800,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const BadgesScreen()),
+                    ),
+                  ),
+                  _MenuTile(
+                    icon: Icons.card_membership_rounded,
+                    title: 'Completion Certificate',
+                    subtitle: allLessonsDone
+                        ? 'Apna certificate banayein aur share karein'
+                        : 'Sabhi lessons complete karke unlock karein',
+                    color: Colors.purple,
+                    isLocked: !progress.isPremium,
+                    onTap: () {
+                      if (!progress.isPremium) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const PremiumScreen()),
+                        );
+                        return;
+                      }
+                      if (!allLessonsDone) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Pehle sabhi lessons complete karein 🙂')),
+                        );
+                        return;
+                      }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const CertificateScreen()),
+                      );
+                    },
                   ),
                   if (!progress.isPremium)
                     _MenuTile(
@@ -137,6 +196,7 @@ class _MenuTile extends StatelessWidget {
     required this.subtitle,
     required this.color,
     required this.onTap,
+    this.isLocked = false,
   });
 
   final IconData icon;
@@ -144,6 +204,7 @@ class _MenuTile extends StatelessWidget {
   final String subtitle;
   final Color color;
   final VoidCallback onTap;
+  final bool isLocked;
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +215,7 @@ class _MenuTile extends StatelessWidget {
         leading: CircleAvatar(backgroundColor: color.withOpacity(0.15), child: Icon(icon, color: color)),
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(subtitle),
-        trailing: const Icon(Icons.chevron_right),
+        trailing: Icon(isLocked ? Icons.lock : Icons.chevron_right, color: isLocked ? Colors.grey : null),
         onTap: onTap,
       ),
     );

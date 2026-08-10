@@ -1,4 +1,12 @@
 import '../models/lesson.dart';
+import '../services/language_service.dart';
+import 'lessons_data_mr.dart';
+
+/// Returns the lesson catalog in the requested language. Falls back to
+/// the Hinglish (default) list for any language code other than Marathi.
+List<Lesson> lessonsFor(String languageCode) {
+  return languageCode == AppLanguage.marathi ? lessonsMarathi : lessons;
+}
 
 /// All lesson content lives here. Add more Lesson entries to grow the course
 /// catalog — no other file needs to change.

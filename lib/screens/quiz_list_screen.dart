@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/quiz_data.dart';
+import '../services/language_service.dart';
 import '../services/progress_service.dart';
 import '../widgets/banner_ad_widget.dart';
 import 'premium_screen.dart';
@@ -12,6 +13,8 @@ class QuizListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final progress = context.watch<ProgressService>();
+    final language = context.watch<LanguageService>().language;
+    final quizList = quizSetsFor(language);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Quiz')),
@@ -21,9 +24,9 @@ class QuizListScreen extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.all(12),
-                itemCount: quizSets.length,
+                itemCount: quizList.length,
                 itemBuilder: (context, index) {
-                  final quiz = quizSets[index];
+                  final quiz = quizList[index];
                   final isLocked = quiz.isPremium && !progress.isPremium;
                   final score = progress.getQuizScore(quiz.id);
                   return Card(
