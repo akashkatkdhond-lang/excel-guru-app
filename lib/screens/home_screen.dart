@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../data/functions_data.dart';
 import '../data/lessons_data.dart';
 import '../data/levels_data.dart';
 import '../data/quiz_data.dart';
@@ -10,12 +11,16 @@ import '../widgets/banner_ad_widget.dart';
 import '../widgets/streak_card.dart';
 import 'badges_screen.dart';
 import 'certificate_screen.dart';
+import 'formula_builder_screen.dart';
+import 'function_reference_screen.dart';
 import 'lesson_list_screen.dart';
 import 'levels_screen.dart';
 import 'premium_screen.dart';
 import 'quiz_list_screen.dart';
 import 'settings_screen.dart';
 import 'simulator_screen.dart';
+import 'spot_the_mistake_screen.dart';
+import 'stats_share_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -100,6 +105,36 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   _MenuTile(
+                    icon: Icons.build_circle_rounded,
+                    title: 'Formula Builder',
+                    subtitle: 'Function choose karein, blanks bharein, formula ban jayega',
+                    color: Colors.indigo,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const FormulaBuilderScreen()),
+                    ),
+                  ),
+                  _MenuTile(
+                    icon: Icons.menu_book_outlined,
+                    title: 'Function Reference',
+                    subtitle: '${excelFunctions.length}+ functions ki searchable list',
+                    color: Colors.brown,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const FunctionReferenceScreen()),
+                    ),
+                  ),
+                  _MenuTile(
+                    icon: Icons.search_rounded,
+                    title: 'Spot the Mistake',
+                    subtitle: 'Galat formula dhundo — quick mini-game',
+                    color: Colors.redAccent,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const SpotTheMistakeScreen()),
+                    ),
+                  ),
+                  _MenuTile(
                     icon: Icons.emoji_events_rounded,
                     title: 'Badges',
                     subtitle: 'Apni achievements dekhein',
@@ -107,6 +142,16 @@ class HomeScreen extends StatelessWidget {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => const BadgesScreen()),
+                    ),
+                  ),
+                  _MenuTile(
+                    icon: Icons.ios_share_rounded,
+                    title: 'Meri Progress Share Karein',
+                    subtitle: 'Apna streak aur badges dosto ko dikhayein',
+                    color: Colors.pink,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const StatsShareScreen()),
                     ),
                   ),
                   _MenuTile(

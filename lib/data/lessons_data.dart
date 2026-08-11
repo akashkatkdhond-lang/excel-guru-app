@@ -37,6 +37,49 @@ final List<Lesson> lessons = [
             'Ek Workbook (file) me multiple Sheets ho sakti hain (tabs neeche '
             'dikhte hain). Har sheet apna alag data rakh sakti hai.',
       ),
+      LessonSection(
+        heading: 'Ribbon aur Tabs',
+        content:
+            'Sabse upar Home, Insert, Page Layout, Formulas, Data, Review, '
+            'View jaise tabs hote hain — har tab me related tools group '
+            'karke rakhe gaye hain. Home tab me formatting, Insert me '
+            'charts/tables, Formulas me function options milte hain.',
+      ),
+      LessonSection(
+        heading: 'Rows aur Columns ki Limit',
+        content:
+            'Ek sheet me 10 lakh se zyada rows (1,048,576) aur 16,384 '
+            'columns hote hain (A se lekar XFD tak). Itna bada data ek hi '
+            'sheet me store ho sakta hai.',
+      ),
+      LessonSection(
+        heading: 'Data Types Automatically Pehchane Jaate Hain',
+        content:
+            'Text hamesha left-align hota hai, numbers aur dates right-align '
+            'hote hain — bina kuch kiye Excel khud pehchan leta hai ki aapne '
+            'kya type kiya hai.',
+      ),
+      LessonSection(
+        heading: 'File Save Karna',
+        content:
+            'Ctrl+S se save hota hai. Excel file ka format ".xlsx" hota hai. '
+            'Naye naam se ya alag jagah save karne ke liye "Save As" (F12) '
+            'use karein.',
+      ),
+      LessonSection(
+        heading: 'Status Bar — Quick Calculation',
+        content:
+            'Kuch bhi cells select karte hi neeche Status Bar me turant '
+            'Sum, Average, aur Count dikh jaata hai — bina koi formula '
+            'likhe quick check karne ke liye.',
+      ),
+      LessonSection(
+        heading: 'Navigation Shortcuts',
+        content:
+            'Ctrl+Home se seedha A1 par jump hota hai. Arrow keys se ek-ek '
+            'cell move karte hain. Ctrl+End se data ke aakhri cell tak '
+            'pahunch jaate hain.',
+      ),
     ],
   ),
   Lesson(

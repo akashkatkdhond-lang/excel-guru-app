@@ -29,6 +29,37 @@ final List<Lesson> lessonsMarathi = [
             'एका Workbook (file) मध्ये अनेक Sheets असू शकतात (खाली tabs दिसतात). प्रत्येक sheet '
             'स्वतःचा वेगळा डेटा ठेवू शकते.',
       ),
+      LessonSection(
+        heading: 'Ribbon आणि Tabs',
+        content:
+            'सगळ्यात वर Home, Insert, Page Layout, Formulas, Data, Review, View असे tabs असतात — '
+            'प्रत्येक tab मध्ये संबंधित tools group करून ठेवलेले असतात.',
+      ),
+      LessonSection(
+        heading: 'Rows आणि Columns ची Limit',
+        content:
+            'एका sheet मध्ये 10 लाखांपेक्षा जास्त rows (1,048,576) आणि 16,384 columns (A ते XFD) असतात.',
+      ),
+      LessonSection(
+        heading: 'Data Types आपोआप ओळखले जातात',
+        content:
+            'Text नेहमी left-align होतो, numbers आणि dates right-align होतात — काहीही न करता Excel स्वतः ओळखतो.',
+      ),
+      LessonSection(
+        heading: 'File Save करणे',
+        content:
+            'Ctrl+S ने save होतं. Excel file चा format ".xlsx" असतो. नवीन नावाने save करण्यासाठी "Save As" (F12) वापरा.',
+      ),
+      LessonSection(
+        heading: 'Status Bar — Quick Calculation',
+        content:
+            'Cells select करताच खाली Status Bar मध्ये लगेच Sum, Average, Count दिसतं — formula न लिहिता quick check साठी.',
+      ),
+      LessonSection(
+        heading: 'Navigation Shortcuts',
+        content:
+            'Ctrl+Home ने सरळ A1 वर जातो. Ctrl+End ने डेटाच्या शेवटच्या cell पर्यंत पोहोचतो.',
+      ),
     ],
   ),
   Lesson(
