@@ -12,10 +12,12 @@ class ProgressService extends ChangeNotifier {
   static const _currentStreakKey = 'current_streak';
   static const _longestStreakKey = 'longest_streak';
   static const _perfectQuizKey = 'has_perfect_quiz';
+  static const _completedLevelsKey = 'completed_levels';
 
   SharedPreferences? _prefs;
   bool _isPremium = false;
   final Set<String> _completedLessons = {};
+  final Set<int> _completedLevels = {};
   int _currentStreak = 0;
   int _longestStreak = 0;
   bool _hasPerfectQuiz = false;
@@ -23,6 +25,7 @@ class ProgressService extends ChangeNotifier {
 
   bool get isPremium => _isPremium;
   Set<String> get completedLessons => _completedLessons;
+  Set<int> get completedLevels => _completedLevels;
   int get currentStreak => _currentStreak;
   int get longestStreak => _longestStreak;
 
@@ -32,6 +35,9 @@ class ProgressService extends ChangeNotifier {
     _completedLessons
       ..clear()
       ..addAll(_prefs?.getStringList(_completedLessonsKey) ?? []);
+    _completedLevels
+      ..clear()
+      ..addAll((_prefs?.getStringList(_completedLevelsKey) ?? []).map(int.parse));
     _currentStreak = _prefs?.getInt(_currentStreakKey) ?? 0;
     _longestStreak = _prefs?.getInt(_longestStreakKey) ?? 0;
     _hasPerfectQuiz = _prefs?.getBool(_perfectQuizKey) ?? false;
@@ -85,6 +91,23 @@ class ProgressService extends ChangeNotifier {
   Future<void> markLessonComplete(String lessonId) async {
     _completedLessons.add(lessonId);
     await _prefs?.setStringList(_completedLessonsKey, _completedLessons.toList());
+    notifyListeners();
+  }
+
+  /// A level `n` is playable if it's level 1, or level `n-1` is already
+  /// completed. Premium levels additionally require [isPremium].
+  bool isLevelUnlocked(int levelNumber, {required bool isPremiumLevel}) {
+    if (isPremiumLevel && !_isPremium) return false;
+    if (levelNumber <= 1) return true;
+    return _completedLevels.contains(levelNumber - 1);
+  }
+
+  Future<void> markLevelComplete(int levelNumber) async {
+    _completedLevels.add(levelNumber);
+    await _prefs?.setStringList(
+      _completedLevelsKey,
+      _completedLevels.map((n) => n.toString()).toList(),
+    );
     notifyListeners();
   }
 

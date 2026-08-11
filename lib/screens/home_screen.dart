@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/lessons_data.dart';
+import '../data/levels_data.dart';
 import '../data/quiz_data.dart';
 import '../services/language_service.dart';
 import '../services/progress_service.dart';
@@ -10,6 +11,7 @@ import '../widgets/streak_card.dart';
 import 'badges_screen.dart';
 import 'certificate_screen.dart';
 import 'lesson_list_screen.dart';
+import 'levels_screen.dart';
 import 'premium_screen.dart';
 import 'quiz_list_screen.dart';
 import 'settings_screen.dart';
@@ -57,6 +59,16 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   Text('Seekhna shuru karein', style: Theme.of(context).textTheme.titleMedium),
                   const SizedBox(height: 10),
+                  _MenuTile(
+                    icon: Icons.stairs_rounded,
+                    title: '50 Levels — Step-by-Step Path',
+                    subtitle: '${progress.completedLevels.length} / ${excelLevels.length} levels complete',
+                    color: Colors.teal,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const LevelsScreen()),
+                    ),
+                  ),
                   _MenuTile(
                     icon: Icons.menu_book_rounded,
                     title: 'Lessons',
