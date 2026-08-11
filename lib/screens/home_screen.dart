@@ -9,10 +9,10 @@ import '../widgets/banner_ad_widget.dart';
 import '../widgets/streak_card.dart';
 import 'badges_screen.dart';
 import 'certificate_screen.dart';
-import 'language_screen.dart';
 import 'lesson_list_screen.dart';
 import 'premium_screen.dart';
 import 'quiz_list_screen.dart';
+import 'settings_screen.dart';
 import 'simulator_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -31,11 +31,11 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Excel Guru'),
         actions: [
           IconButton(
-            tooltip: 'Language',
-            icon: const Icon(Icons.language),
+            tooltip: 'Settings',
+            icon: const Icon(Icons.settings_outlined),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const LanguageScreen()),
+              MaterialPageRoute(builder: (_) => const SettingsScreen()),
             ),
           ),
         ],
@@ -47,7 +47,11 @@ class HomeScreen extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.all(16),
                 children: [
-                  _WelcomeCard(completed: completedCount, total: total),
+                  _WelcomeCard(
+                    completed: completedCount,
+                    total: total,
+                    level: progress.currentLevelLabel(totalLessonCount: total),
+                  ),
                   const SizedBox(height: 14),
                   StreakCard(currentStreak: progress.currentStreak),
                   const SizedBox(height: 20),
@@ -145,9 +149,10 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _WelcomeCard extends StatelessWidget {
-  const _WelcomeCard({required this.completed, required this.total});
+  const _WelcomeCard({required this.completed, required this.total, required this.level});
   final int completed;
   final int total;
+  final String level;
 
   @override
   Widget build(BuildContext context) {
@@ -165,8 +170,21 @@ class _WelcomeCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Namaste! 👋',
-              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Namaste! 👋',
+                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(level, style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w600)),
+              ),
+            ],
+          ),
           const SizedBox(height: 6),
           const Text('Excel seekhein, practice karein, expert banein.',
               style: TextStyle(color: Colors.white70)),

@@ -32,4 +32,35 @@ class AppTheme {
           ),
         ),
       );
+
+  static ThemeData get dark => ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: excelGreen,
+          brightness: Brightness.dark,
+          primary: const Color(0xFF4CAF7D),
+          secondary: accent,
+        ),
+        scaffoldBackgroundColor: const Color(0xFF121513),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF17251D),
+          foregroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
+        ),
+        cardTheme: CardThemeData(
+          elevation: 1,
+          color: const Color(0xFF1C2620),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF4CAF7D),
+            foregroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+        ),
+      );
 }

@@ -108,14 +108,46 @@ class ProgressService extends ChangeNotifier {
   /// service doesn't need to import lesson data directly.
   Set<String> unlockedBadgeIds({required int totalLessonCount}) {
     final unlocked = <String>{};
-    if (_completedLessons.isNotEmpty) unlocked.add('first_lesson');
+    final done = _completedLessons.length;
+
+    if (done > 0) unlocked.add('first_lesson');
     if (_totalQuizzesTaken > 0) unlocked.add('first_quiz');
-    if (totalLessonCount > 0 && _completedLessons.length >= totalLessonCount) {
-      unlocked.add('all_lessons');
+
+    if (totalLessonCount > 0) {
+      if (done >= 1) unlocked.add('level_beginner');
+      if (done >= (totalLessonCount * 0.4).ceil()) unlocked.add('level_intermediate');
+      if (done >= (totalLessonCount * 0.7).ceil()) unlocked.add('level_advanced');
+      if (done >= totalLessonCount) unlocked.add('level_expert');
     }
+
     if (_currentStreak >= 3) unlocked.add('streak_3');
     if (_currentStreak >= 7) unlocked.add('streak_7');
     if (_hasPerfectQuiz) unlocked.add('perfect_quiz');
     return unlocked;
   }
+
+  /// The user's current level label, shown on Home. Mirrors the level_*
+  /// badge thresholds in [unlockedBadgeIds].
+  String currentLevelLabel({required int totalLessonCount}) {
+    final unlocked = unlockedBadgeIds(totalLessonCount: totalLessonCount);
+    if (unlocked.contains('level_expert')) return 'Excel Expert';
+    if (unlocked.contains('level_advanced')) return 'Advanced';
+    if (unlocked.contains('level_intermediate')) return 'Intermediate';
+    if (unlocked.contains('level_beginner')) return 'Beginner';
+    return 'Naya Seekhne Wala';
+  }
+
+  /// A stable, unique-looking certificate ID — generated once per install
+  /// and reused for every certificate share afterwards.
+  String get certificateId {
+    var id = _prefs?.getString(_certificateIdKey);
+    if (id == null) {
+      final now = DateTime.now().millisecondsSinceEpoch;
+      id = 'EG-${now.toRadixString(36).toUpperCase()}';
+      _prefs?.setString(_certificateIdKey, id);
+    }
+    return id;
+  }
+
+  static const _certificateIdKey = 'certificate_id';
 }

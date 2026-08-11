@@ -29,6 +29,9 @@ dependencies:
   # Save certificate image to a temp file before sharing
   path_provider: ^2.1.3
 
+  # Real PDF certificate generation
+  pdf: ^3.11.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

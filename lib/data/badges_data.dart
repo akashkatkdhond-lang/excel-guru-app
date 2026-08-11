@@ -17,8 +17,26 @@ final List<AppBadge> allBadges = [
     icon: '📝',
   ),
   const AppBadge(
-    id: 'all_lessons',
-    title: 'Excel Guru',
+    id: 'level_beginner',
+    title: 'Beginner',
+    description: 'Excel seekhna shuru kiya',
+    icon: '🔰',
+  ),
+  const AppBadge(
+    id: 'level_intermediate',
+    title: 'Intermediate',
+    description: 'Aadhe se zyada lessons complete kiye',
+    icon: '📘',
+  ),
+  const AppBadge(
+    id: 'level_advanced',
+    title: 'Advanced',
+    description: 'Zyadatar lessons complete kiye',
+    icon: '📗',
+  ),
+  const AppBadge(
+    id: 'level_expert',
+    title: 'Excel Expert',
     description: 'Sabhi lessons complete kiye',
     icon: '🏆',
   ),
