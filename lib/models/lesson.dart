@@ -4,10 +4,16 @@ class LessonSection {
   final String content;
   final String? formulaExample;
 
+  /// A short, relatable real-life analogy or "did you know" nugget shown
+  /// in a highlighted callout box — makes the section more fun/memorable
+  /// instead of just dry theory.
+  final String? funFact;
+
   const LessonSection({
     required this.heading,
     required this.content,
     this.formulaExample,
+    this.funFact,
   });
 }
 

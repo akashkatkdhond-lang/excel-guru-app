@@ -38,6 +38,18 @@ final List<QuizSet> quizSets = [
         correctIndex: 1,
         explanation: 'Ek workbook me multiple sheets add ki ja sakti hain.',
       ),
+      QuizQuestion(
+        question: 'Seedha A1 cell par jump karne ke liye kaunsa shortcut hai?',
+        options: ['Ctrl+Home', 'Ctrl+End', 'Ctrl+A', 'F2'],
+        correctIndex: 0,
+        explanation: 'Ctrl+Home hamesha seedha A1 par le jaata hai — kitna bhi neeche/right ho.',
+      ),
+      QuizQuestion(
+        question: 'Excel file ka default modern format kya hai?',
+        options: ['.doc', '.xlsx', '.pdf', '.txt'],
+        correctIndex: 1,
+        explanation: '.xlsx 2007 se Excel ka standard file format hai.',
+      ),
     ],
   ),
   QuizSet(
@@ -67,6 +79,18 @@ final List<QuizSet> quizSets = [
         correctIndex: 1,
         explanation: 'MAX function sabse bada number return karta hai.',
       ),
+      QuizQuestion(
+        question: '=ROUND(4.567,1) ka result kya hoga?',
+        options: ['4.5', '4.6', '4.57', '5'],
+        correctIndex: 1,
+        explanation: '1 decimal place tak round karne par 4.567 → 4.6 ban jaata hai.',
+      ),
+      QuizQuestion(
+        question: '=TODAY() formula kya deta hai?',
+        options: ['Kal ki date', 'Aaj ki date', 'File create hone ki date', 'Ek random date'],
+        correctIndex: 1,
+        explanation: 'TODAY() har baar file kholne par aaj ki current date deta hai.',
+      ),
     ],
   ),
   QuizSet(
@@ -90,6 +114,144 @@ final List<QuizSet> quizSets = [
         ],
         correctIndex: 1,
         explanation: 'AND tabhi TRUE deta hai jab sabhi conditions sahi hon.',
+      ),
+    ],
+  ),
+  QuizSet(
+    id: 'lookup_quiz',
+    title: '🔍 Lookup Functions Quiz',
+    isPremium: true,
+    questions: const [
+      QuizQuestion(
+        question: 'VLOOKUP me "V" ka matlab kya hai?',
+        options: ['Value', 'Vertical', 'Variable', 'Verify'],
+        correctIndex: 1,
+        explanation: 'VLOOKUP = Vertical Lookup — column me neeche ki taraf search karta hai.',
+      ),
+      QuizQuestion(
+        question: 'VLOOKUP me exact match ke liye last argument kya hona chahiye?',
+        options: ['TRUE', 'FALSE', '0', 'Dono TRUE aur 0'],
+        correctIndex: 3,
+        explanation: 'FALSE aur 0 dono se exact match milta hai — TRUE approximate match deta hai.',
+      ),
+      QuizQuestion(
+        question: 'INDEX-MATCH, VLOOKUP se better kyun mana jaata hai?',
+        options: [
+          'Kyunki likhna chhota hai',
+          'Kyunki left-right dono direction me search kar sakta hai',
+          'Kyunki sirf text ke liye kaam karta hai',
+          'Koi fayda nahi hai',
+        ],
+        correctIndex: 1,
+        explanation: 'VLOOKUP sirf right-side columns dekhta hai, INDEX-MATCH kisi bhi direction me search kar sakta hai.',
+      ),
+      QuizQuestion(
+        question: 'Agar VLOOKUP ko value nahi milti, to kya error deta hai?',
+        options: ['#DIV/0!', '#N/A', '#REF!', '#NAME?'],
+        correctIndex: 1,
+        explanation: '#N/A ka matlab hai "value not available" — table me match nahi mila.',
+      ),
+    ],
+  ),
+  QuizSet(
+    id: 'shortcuts_quiz',
+    title: '⌨️ Shortcuts Quiz',
+    questions: const [
+      QuizQuestion(
+        question: 'Poora column select karne ke liye kaunsa shortcut hai?',
+        options: ['Ctrl+Space', 'Shift+Space', 'Ctrl+A', 'Alt+Space'],
+        correctIndex: 0,
+        explanation: 'Ctrl+Space poora column select karta hai, Shift+Space poori row.',
+      ),
+      QuizQuestion(
+        question: 'Cell ki reference lock karne ( \$A\$1 ) ke liye kaunsi key dabate hain?',
+        options: ['F2', 'F4', 'F5', 'F9'],
+        correctIndex: 1,
+        explanation: 'F4 dabane se \$ signs automatically add ho jaate hain.',
+      ),
+      QuizQuestion(
+        question: 'Cell ko edit mode me kholne ke liye kaunsi key?',
+        options: ['F1', 'F2', 'F3', 'F4'],
+        correctIndex: 1,
+        explanation: 'F2 dabane se selected cell edit mode me khul jaata hai.',
+      ),
+      QuizQuestion(
+        question: 'AutoSum turant lagane ka shortcut kya hai?',
+        options: ['Ctrl+=', 'Alt+=', 'Shift+=', 'Ctrl+Shift+='],
+        correctIndex: 1,
+        explanation: 'Alt+= select ki hui range ka turant SUM formula bana deta hai.',
+      ),
+    ],
+  ),
+  QuizSet(
+    id: 'conditional_formatting_quiz',
+    title: '🎨 Conditional Formatting Quiz',
+    isPremium: true,
+    questions: const [
+      QuizQuestion(
+        question: 'Conditional Formatting kya karta hai?',
+        options: [
+          'Cells ko condition ke basis par automatic color/highlight karta hai',
+          'Sirf font size badalta hai',
+          'File ko password protect karta hai',
+          'Formula ko chhupata hai',
+        ],
+        correctIndex: 0,
+        explanation: 'Yeh ek rule ke basis par cells ko automatically highlight karta hai.',
+      ),
+      QuizQuestion(
+        question: 'Numbers ko unki value ke hisaab se gradient color dene ke liye kaunsa option use karte hain?',
+        options: ['Data Bars', 'Color Scales', 'Icon Sets', 'Cell Styles'],
+        correctIndex: 1,
+        explanation: 'Color Scales chhote-bade numbers ko halke-gehre color me dikhata hai.',
+      ),
+      QuizQuestion(
+        question: 'Cell ke andar mini bar chart dikhane wala option kya kehlaata hai?',
+        options: ['Color Scales', 'Icon Sets', 'Data Bars', 'Sparklines'],
+        correctIndex: 2,
+        explanation: 'Data Bars har cell ke andar value ke proportion me ek bar dikhate hain.',
+      ),
+      QuizQuestion(
+        question: 'Poori row highlight karne ke liye custom rule me reference kaise likhna chahiye?',
+        options: ['\$B2 (column lock)', 'B\$2 (row lock)', 'B2 (dono relative)', '\$B\$2 (dono lock)'],
+        correctIndex: 0,
+        explanation: 'Column lock (\$B2) karne se row ke sabhi cells ek hi column (B) check karte hain, isliye poori row highlight hoti hai.',
+      ),
+    ],
+  ),
+  QuizSet(
+    id: 'data_cleaning_quiz',
+    title: '🧹 Data Cleaning Quiz',
+    isPremium: true,
+    questions: const [
+      QuizQuestion(
+        question: 'Data Validation se dropdown list banane ka main fayda kya hai?',
+        options: [
+          'Sheet ko colorful banata hai',
+          'Data entry errors kam karta hai',
+          'File size chhota karta hai',
+          'Print speed badhata hai',
+        ],
+        correctIndex: 1,
+        explanation: 'Jab user sirf list se choose kar sakta hai, to typing errors nahi hote.',
+      ),
+      QuizQuestion(
+        question: 'Remove Duplicates use karne se pehle kya karna chahiye?',
+        options: ['Data ka backup rakhna', 'File delete karna', 'Sheet rename karna', 'Kuch nahi'],
+        correctIndex: 0,
+        explanation: 'Duplicates hatana permanent ho sakta hai, isliye backup rakhna safe practice hai.',
+      ),
+      QuizQuestion(
+        question: '=IFERROR(A1/B1,"N/A") — agar B1 khali (0) ho to kya dikhega?',
+        options: ['#DIV/0!', 'N/A', 'Blank', 'Error message crash'],
+        correctIndex: 1,
+        explanation: 'IFERROR ne #DIV/0! error ko pakad kar "N/A" custom message dikhaya.',
+      ),
+      QuizQuestion(
+        question: 'Ek column ke text ko comma se split karke alag columns banane ke liye kya use karte hain?',
+        options: ['Remove Duplicates', 'Data Validation', 'Text to Columns', 'Conditional Formatting'],
+        correctIndex: 2,
+        explanation: 'Text to Columns ek column ke data ko delimiter (comma/space) ke basis par split karta hai.',
       ),
     ],
   ),
