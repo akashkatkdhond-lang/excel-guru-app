@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=720, initial-scale=1">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+  body { width:720px; height:1280px; background:#F6F8F6; overflow:hidden; }
+  .appbar { background:#1D6F42; color:#fff; height:100px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:600; }
+  .content { padding:26px; }
+  .bar { background:#ddd; height:10px; border-radius:8px; overflow:hidden; }
+  .bar-fill { background:#1D6F42; height:100%; width:40%; }
+  .qcount { color:#888; margin-top:10px; font-size:15px; }
+  .question { font-size:24px; font-weight:700; color:#222; margin-top:20px; line-height:1.4; }
+  .opt { background:#fff; border-radius:14px; padding:20px; margin-top:16px; font-size:17px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 1px 4px rgba(0,0,0,0.06); }
+  .opt.correct { background:rgba(76,175,80,0.15); }
+  .opt.wrong { background:rgba(244,67,54,0.15); }
+  .explain { background:rgba(96,125,139,0.1); border-radius:12px; padding:18px; margin-top:22px; font-size:15px; color:#333; line-height:1.5; }
+  .btn { background:#1D6F42; color:#fff; text-align:center; padding:18px; border-radius:12px; margin-top:20px; font-size:18px; font-weight:600; }
+</style></head>
+<body>
+  <div class="appbar">Logical Functions Quiz</div>
+  <div class="content">
+    <div class="bar"><div class="bar-fill"></div></div>
+    <div class="qcount">Question 2 / 5</div>
+    <div class="question">=IF(A1&gt;50,"Pass","Fail") — agar A1 = 40 hai to result?</div>
+    <div class="opt">Pass</div>
+    <div class="opt correct">Fail ✓</div>
+    <div class="opt">Error</div>
+    <div class="opt">Blank</div>
+    <div class="explain">40, 50 se chhota hai isliye condition FALSE — "Fail" milega.</div>
+    <div class="btn">Next Question</div>
+  </div>
+</body></html>

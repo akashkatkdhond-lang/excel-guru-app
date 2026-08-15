@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=720, initial-scale=1">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+  body { width:720px; height:1280px; background:#F6F8F6; overflow:hidden; }
+  .appbar { background:#1D6F42; color:#fff; height:100px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:600; position:relative; }
+  .appbar .icons { position:absolute; right:20px; font-size:20px; display:flex; gap:16px; }
+  .fbar { background:#eee; padding:14px 18px; display:flex; align-items:center; gap:12px; }
+  .cellname { background:#1D6F42; color:#fff; font-weight:700; padding:8px 14px; border-radius:6px; font-size:16px; }
+  .finput { flex:1; background:#fff; border:1px solid #ccc; border-radius:6px; padding:10px 14px; font-size:15px; color:#333; }
+  table { width:100%; border-collapse:collapse; margin-top:2px; }
+  th, td { border:1px solid #ddd; padding:14px 10px; font-size:15px; text-align:left; background:#fff; }
+  th { background:#e8e8e8; text-align:center; font-weight:700; color:#333; }
+  td.rownum { background:#e8e8e8; text-align:center; font-weight:700; color:#333; width:40px; }
+  td.sel { background:rgba(29,111,66,0.15); font-weight:700; }
+</style></head>
+<body>
+  <div class="appbar">Practice Simulator <span class="icons">✨ 🗑️</span></div>
+  <div class="fbar"><div class="cellname">B5</div><div class="finput">=SUM(B2:B4)</div></div>
+  <table>
+    <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+    <tr><td class="rownum">1</td><td>Item</td><td>Price</td><td></td><td></td></tr>
+    <tr><td class="rownum">2</td><td>Pen</td><td>10</td><td></td><td></td></tr>
+    <tr><td class="rownum">3</td><td>Notebook</td><td>40</td><td></td><td></td></tr>
+    <tr><td class="rownum">4</td><td>Bag</td><td>250</td><td></td><td></td></tr>
+    <tr><td class="rownum">5</td><td>Total</td><td class="sel">300</td><td></td><td></td></tr>
+    <tr><td class="rownum">6</td><td>Average</td><td>100</td><td></td><td></td></tr>
+    <tr><td class="rownum">7</td><td>Status</td><td>Costly</td><td></td><td></td></tr>
+    <tr><td class="rownum">8</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="rownum">9</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="rownum">10</td><td></td><td></td><td></td><td></td></tr>
+  </table>
+</body></html>
