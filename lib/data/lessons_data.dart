@@ -110,6 +110,7 @@ final List<Lesson> lessons = [
         content: 'SUM function ek range ke sabhi numbers ko add karta hai.',
         formulaExample: '=SUM(A1:A5)',
         funFact: 'Ribbon me "AutoSum" (Σ symbol) button se ek click me SUM formula ban jaata hai — Alt+= shortcut bhi try karo!',
+        animationKey: 'sum',
       ),
       LessonSection(
         heading: 'AVERAGE — average nikalna',
@@ -162,6 +163,7 @@ final List<Lesson> lessons = [
             'agar FALSE hai to dusri value deta hai.',
         formulaExample: '=IF(A1>50,"Pass","Fail")',
         funFact: 'IF ko "agar-to-warna" ki tarah socho — bilkul waise hi jaise hum roz decisions lete hain: "Agar barish ho rahi hai to chhata lo, warna nahi".',
+        animationKey: 'if',
       ),
       LessonSection(
         heading: 'AND / OR ke saath IF',
@@ -196,6 +198,7 @@ final List<Lesson> lessons = [
             'reports banate waqt.',
         formulaExample: '=VLOOKUP(A2,\$D\$2:\$F\$100,3,FALSE)',
         funFact: 'VLOOKUP job interviews me sabse zyada pucha jaane wala Excel topic hai — ismein expert banna resume ko strong bana sakta hai!',
+        animationKey: 'vlookup',
       ),
       LessonSection(
         heading: 'HLOOKUP',
@@ -263,6 +266,7 @@ final List<Lesson> lessons = [
             'ka sabse powerful tool hai — group by, total, average sab '
             'drag-drop se ho jata hai.',
         funFact: 'Data analysts kehte hain "Pivot Table seekh lo, Excel ka 80% kaam ho gaya" — yeh itna powerful tool hai!',
+        animationKey: 'pivot',
       ),
     ],
   ),

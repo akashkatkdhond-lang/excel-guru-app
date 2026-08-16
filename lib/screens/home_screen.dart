@@ -11,6 +11,7 @@ import '../widgets/banner_ad_widget.dart';
 import '../widgets/streak_card.dart';
 import 'badges_screen.dart';
 import 'certificate_screen.dart';
+import 'daily_challenge_screen.dart';
 import 'formula_builder_screen.dart';
 import 'function_reference_screen.dart';
 import 'lesson_list_screen.dart';
@@ -61,6 +62,19 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
                   StreakCard(currentStreak: progress.currentStreak),
+                  const SizedBox(height: 14),
+                  _MenuTile(
+                    icon: Icons.local_fire_department_rounded,
+                    title: 'Daily Challenge',
+                    subtitle: progress.isTodayChallengeDone
+                        ? 'Aaj complete! 🔥 ${progress.dailyChallengeStreak} din ka streak'
+                        : 'Aaj ka challenge abhi baaki hai',
+                    color: Colors.deepOrange,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const DailyChallengeScreen()),
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   Text('Seekhna shuru karein', style: Theme.of(context).textTheme.titleMedium),
                   const SizedBox(height: 10),

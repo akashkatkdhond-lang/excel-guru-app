@@ -90,6 +90,7 @@ final List<Lesson> lessonsMarathi = [
         content: 'SUM function एका range मधल्या सर्व numbers ची बेरीज करतो.',
         formulaExample: '=SUM(A1:A5)',
         funFact: 'Ribbon मधील "AutoSum" (Σ) बटणाने एका click मध्ये SUM formula तयार होतो — Alt+= shortcut सुद्धा वापरून पहा!',
+        animationKey: 'sum',
       ),
       LessonSection(
         heading: 'AVERAGE — सरासरी काढणे',
@@ -142,6 +143,7 @@ final List<Lesson> lessonsMarathi = [
             'value देतो.',
         formulaExample: '=IF(A1>50,"Pass","Fail")',
         funFact: 'IF ला "जर-तर-नाहीतर" सारखं समजा — रोजच्या आयुष्यातल्या निर्णयांसारखंच!',
+        animationKey: 'if',
       ),
       LessonSection(
         heading: 'AND / OR सोबत IF',
@@ -174,6 +176,7 @@ final List<Lesson> lessonsMarathi = [
             'column चा डेटा आणतो. Reports बनवताना खूप common आहे.',
         formulaExample: '=VLOOKUP(A2,\$D\$2:\$F\$100,3,FALSE)',
         funFact: 'Job interviews मध्ये VLOOKUP सर्वात जास्त विचारला जाणारा Excel topic आहे!',
+        animationKey: 'vlookup',
       ),
       LessonSection(
         heading: 'HLOOKUP',
@@ -240,6 +243,7 @@ final List<Lesson> lessonsMarathi = [
             'Pivot Table मोठ्या डेटाचा summary करून पटकन analyze करण्याचं सगळ्यात powerful '
             'साधन आहे — group by, total, average सगळं drag-drop ने होतं.',
         funFact: 'Data analysts म्हणतात "Pivot Table शिका, Excel चं 80% काम झालं" — इतकं शक्तिशाली टूल आहे!',
+        animationKey: 'pivot',
       ),
     ],
   ),

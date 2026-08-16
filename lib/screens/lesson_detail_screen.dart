@@ -4,6 +4,8 @@ import '../models/lesson.dart';
 import '../services/ad_service.dart';
 import '../services/progress_service.dart';
 import '../theme/app_theme.dart';
+import '../widgets/concept_animations/animation_registry.dart';
+import '../widgets/concept_animations/concept_animation_scaffold.dart';
 
 class LessonDetailScreen extends StatefulWidget {
   const LessonDetailScreen({super.key, required this.lesson});
@@ -155,6 +157,17 @@ class _SectionCard extends StatelessWidget {
                       child: Text(section.funFact!, style: const TextStyle(fontSize: 13, height: 1.4)),
                     ),
                   ],
+                ),
+              ),
+            ],
+            if (section.animationKey != null && conceptAnimations.containsKey(section.animationKey)) ...[
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () => showConceptAnimation(context, conceptAnimations[section.animationKey]!(context)),
+                  icon: const Icon(Icons.play_circle_fill_rounded, color: AppTheme.excelGreen),
+                  label: const Text('Animation Dekho'),
                 ),
               ),
             ],

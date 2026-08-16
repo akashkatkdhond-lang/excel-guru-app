@@ -9,11 +9,18 @@ class LessonSection {
   /// instead of just dry theory.
   final String? funFact;
 
+  /// Optional key into the concept-animation registry (see
+  /// widgets/concept_animations/animation_registry.dart). When set, the
+  /// section shows a "▶ Animation Dekho" button that plays a short
+  /// animated visual explanation of the concept.
+  final String? animationKey;
+
   const LessonSection({
     required this.heading,
     required this.content,
     this.formulaExample,
     this.funFact,
+    this.animationKey,
   });
 }
 

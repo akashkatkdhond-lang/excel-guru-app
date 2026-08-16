@@ -13,6 +13,7 @@ class ProgressService extends ChangeNotifier {
   static const _longestStreakKey = 'longest_streak';
   static const _perfectQuizKey = 'has_perfect_quiz';
   static const _completedLevelsKey = 'completed_levels';
+  static const _dailyChallengeDatesKey = 'daily_challenge_dates';
 
   SharedPreferences? _prefs;
   bool _isPremium = false;
@@ -22,6 +23,7 @@ class ProgressService extends ChangeNotifier {
   int _longestStreak = 0;
   bool _hasPerfectQuiz = false;
   int _totalQuizzesTaken = 0;
+  final Set<String> _dailyChallengeDates = {}; // yyyy-MM-dd strings
 
   bool get isPremium => _isPremium;
   Set<String> get completedLessons => _completedLessons;
@@ -42,6 +44,9 @@ class ProgressService extends ChangeNotifier {
     _longestStreak = _prefs?.getInt(_longestStreakKey) ?? 0;
     _hasPerfectQuiz = _prefs?.getBool(_perfectQuizKey) ?? false;
     _totalQuizzesTaken = _countSavedQuizScores();
+    _dailyChallengeDates
+      ..clear()
+      ..addAll(_prefs?.getStringList(_dailyChallengeDatesKey) ?? []);
     await _updateStreakOnOpen();
     notifyListeners();
   }
@@ -173,4 +178,54 @@ class ProgressService extends ChangeNotifier {
   }
 
   static const _certificateIdKey = 'certificate_id';
+
+  // ---- Daily Challenge ----
+
+  String _dateKey(DateTime dt) =>
+      '${dt.year.toString().padLeft(4, '0')}-${dt.month.toString().padLeft(2, '0')}-${dt.day.toString().padLeft(2, '0')}';
+
+  /// Deterministic index into the challenge pool for a given date — every
+  /// user sees the same challenge on the same calendar day, and it rotates
+  /// automatically without needing a server.
+  int challengeIndexFor(DateTime date, int poolSize) {
+    if (poolSize <= 0) return 0;
+    final dayOfYear = date.difference(DateTime(date.year, 1, 1)).inDays;
+    // Fold the year in too so the rotation doesn't repeat on the same
+    // calendar date every year.
+    return (date.year * 366 + dayOfYear) % poolSize;
+  }
+
+  bool get isTodayChallengeDone => _dailyChallengeDates.contains(_dateKey(DateTime.now()));
+
+  /// Consecutive-day streak of completed Daily Challenges, counting back
+  /// from today (or yesterday, so the streak doesn't drop to 0 the moment
+  /// the clock ticks past midnight before today's is done).
+  int get dailyChallengeStreak {
+    var streak = 0;
+    var day = DateTime.now();
+    if (!_dailyChallengeDates.contains(_dateKey(day))) {
+      day = day.subtract(const Duration(days: 1));
+    }
+    while (_dailyChallengeDates.contains(_dateKey(day))) {
+      streak++;
+      day = day.subtract(const Duration(days: 1));
+    }
+    return streak;
+  }
+
+  /// Last 7 days as (date, completed) pairs, oldest first — used to draw
+  /// the mini calendar strip.
+  List<MapEntry<DateTime, bool>> lastSevenDaysChallengeStatus() {
+    final today = _dateOnly(DateTime.now());
+    return List.generate(7, (i) {
+      final day = today.subtract(Duration(days: 6 - i));
+      return MapEntry(day, _dailyChallengeDates.contains(_dateKey(day)));
+    });
+  }
+
+  Future<void> markTodayChallengeDone() async {
+    _dailyChallengeDates.add(_dateKey(DateTime.now()));
+    await _prefs?.setStringList(_dailyChallengeDatesKey, _dailyChallengeDates.toList());
+    notifyListeners();
+  }
 }
